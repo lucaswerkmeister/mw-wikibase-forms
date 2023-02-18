@@ -49,22 +49,21 @@ class SpecialNewFromForm extends SpecialPage {
 	private $valueParserFactory;
 
 	public static function fromGlobalScope() : SpecialNewFromForm {
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$context = RequestContext::getMain();
 		return new self(
-			new MediaWikiFormProvider( $wikibaseRepo->getEntityIdParser() ),
-			$wikibaseRepo->getLanguageFallbackLabelDescriptionLookupFactory()->newLabelDescriptionLookup( $context->getLanguage() ),
-			$wikibaseRepo->newEditEntityFactory( $context ),
-			$wikibaseRepo->getPropertyDataTypeLookup(),
-			$wikibaseRepo->getValueParserFactory(),
-			$wikibaseRepo->getDataTypeValidatorFactory(),
-			$wikibaseRepo->getValidatorErrorLocalizer(),
-			$wikibaseRepo->getEntityTitleLookup(),
-			$wikibaseRepo->getCompactBaseDataModelSerializerFactory()->newSnakSerializer( false ),
-			$wikibaseRepo->getDataValueFactory(),
+			new MediaWikiFormProvider( WikibaseRepo::getEntityIdParser() ),
+			WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory()->newLabelDescriptionLookup( $context->getLanguage() ),
+			WikibaseRepo::getEditEntityFactory(),
+			WikibaseRepo::getPropertyDataTypeLookup(),
+			WikibaseRepo::getValueParserFactory(),
+			WikibaseRepo::getDataTypeValidatorFactory(),
+			WikibaseRepo::getValidatorErrorLocalizer(),
+			WikibaseRepo::getEntityTitleLookup(),
+			WikibaseRepo::getCompactBaseDataModelSerializerFactory()->newSnakSerializer( false ),
+			WikibaseRepo::getDataValueFactory(),
 			new GuidGenerator(),
-			$wikibaseRepo->getEntityFactory(),
-			$wikibaseRepo->getEntityStore()
+			WikibaseRepo::getEntityFactory(),
+			WikibaseRepo::getEntityStore()
 		);
 	}
 
@@ -397,9 +396,9 @@ class SpecialNewFromForm extends SpecialPage {
 			}
 		}
 
-		$item->setStatements( new StatementList( $statements ) );
+		$item->setStatements( new StatementList( ...$statements ) );
 
-		$editEntity = $this->editEntityFactory->newEditEntity( $this->getUser(), null, 0, true );
+		$editEntity = $this->editEntityFactory->newEditEntity( $this->getContext(), null, 0, true );
 
 		$saveStatus = $editEntity->attemptSave(
 			$item,

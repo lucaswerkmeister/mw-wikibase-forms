@@ -146,7 +146,6 @@ class SpecialNewFromFormTest extends TestCase {
 			][ $propertyId->getSerialization() ];
 		} ) );
 
-		$wikibaseRepo = WikibaseRepo::getDefaultInstance();
 		$dataTypeValidatorFactory = $this->getMock( DataTypeValidatorFactory::class );
 		$dataTypeValidatorFactory->expects( $this->any() )
 		->method( 'getValidators' )
@@ -168,7 +167,7 @@ class SpecialNewFromFormTest extends TestCase {
 			$this->getMock( LabelDescriptionLookup::class ),
 			$this->getEditEntityFactory( $editEntity ),
 			$propertyDataTypeLookup,
-			$wikibaseRepo->getValueParserFactory(),
+			WikibaseRepo::getValueParserFactory(),
 	/*
 			$this->getMockBuilder( ValueParserFactory::class )
 				->disableOriginalConstructor()
@@ -177,12 +176,12 @@ class SpecialNewFromFormTest extends TestCase {
 			$dataTypeValidatorFactory,
 			$this->getMock( ValidatorErrorLocalizer::class ),
 			$this->getEntityTitleLookup(),
-			$wikibaseRepo->getCompactBaseDataModelSerializerFactory()->newSnakSerializer( false ),
-			$wikibaseRepo->getDataValueFactory(),
+			WikibaseRepo::getCompactBaseDataModelSerializerFactory()->newSnakSerializer( false ),
+			WikibaseRepo::getDataValueFactory(),
 			$this->getMockBuilder( GuidGenerator::class )
 				->disableOriginalConstructor()
 				->getMock(),
-			$wikibaseRepo->getEntityFactory(),
+			WikibaseRepo::getEntityFactory(),
 			$this->getMockEntityStore()
 		);
 	}
