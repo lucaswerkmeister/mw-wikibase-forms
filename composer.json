@@ -16,7 +16,7 @@
     ],
     "require": {
       "adrianheine/wikibase-forms": "dev-data-values",
-      "php": "^7.0",
+      "php": ">=7.0",
       "wikibase/data-model": "^9.5.1|^8.0.0|^7.3.0",
       "wikibase/data-model-services": "^5.2.0|^4.0.0|^3.9.0"
     },
