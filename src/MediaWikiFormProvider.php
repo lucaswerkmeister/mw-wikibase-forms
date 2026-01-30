@@ -21,6 +21,7 @@ declare( strict_types=1 );
 namespace MwWikibaseForms;
 
 use ContentHandler;
+use Exception;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\SlotRecord;
