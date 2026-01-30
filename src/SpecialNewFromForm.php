@@ -52,7 +52,7 @@ class SpecialNewFromForm extends SpecialPage {
 		$context = RequestContext::getMain();
 		return new self(
 			new MediaWikiFormProvider( WikibaseRepo::getEntityIdParser() ),
-			WikibaseRepo::getLanguageFallbackLabelDescriptionLookupFactory()->newLabelDescriptionLookup( $context->getLanguage() ),
+			WikibaseRepo::getFallbackLabelDescriptionLookupFactory()->newLabelDescriptionLookup( $context->getLanguage() ),
 			WikibaseRepo::getEditEntityFactory(),
 			WikibaseRepo::getPropertyDataTypeLookup(),
 			WikibaseRepo::getValueParserFactory(),
