@@ -37,13 +37,14 @@ class MediaWikiFormProvider implements FormProvider {
 	}
 
 	public function getForm( string $name ): Form {
-		$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'wikibase-forms' );
+		$services = MediaWikiServices::getInstance();
+		$config = $services->getConfigFactory()->makeConfig( 'wikibase-forms' );
 		$ns = $config->get( 'WikibaseFormsNamespace' );
 		$title = Title::makeTitleSafe( $ns, $name );
 		if ( !$title || !$title->exists() ) {
 			throw new Exception( "Form not found" );
 		}
-		$wikiPage = WikiPage::factory( $title );
+		$wikiPage = $services->getWikiPageFactory()->newFromTitle( $title );
 		$revision = $wikiPage->getRevisionRecord();
 		$content = $revision->getContent( SlotRecord::MAIN, RevisionRecord::RAW );
 		$text = ContentHandler::getContentText( $content );
